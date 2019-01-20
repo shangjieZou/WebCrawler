@@ -19,12 +19,20 @@ def get_page_structure(url):
     Target_page_soup = BeautifulSoup(Target_page, "html.parser")
     return Target_page_soup
 
-def get_html_list_for_parts(url):
+def get_html_list_for_parts(html):
     BioBrick_pattern = r"<TR><TD><A class='noul_link part_link' href='(.+)'>BBa_"
-    BioBrick_html = str(re.findall(BioBrick_pattern, url))
+    BioBrick_html = str(re.findall(BioBrick_pattern, html))
+    return BioBrick_html
+
+def main():
+    html = get_url_txt("http://parts.igem.org/Promoters/Catalog/Ecoli/Constitutive")
+    f = open('Constitutive.txt', 'w')
+    f.write(get_html_list_for_parts(html))
+    f.close()
+    print("finished")
 
 
-
+main()
 
 
 
